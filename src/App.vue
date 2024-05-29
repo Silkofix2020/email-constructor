@@ -34,9 +34,9 @@
         @change="updateHtmlCode"
       />
       <select v-model="option" name="option">
-        <option value="some-text">some-text 1</option>
-        <option value="some-text">some-text 2</option>
-        <option value="some-text">some-text 3</option>
+        <option value="some-text 1">some-text 1</option>
+        <option value="some-text 2">some-text 2</option>
+        <option value="some-text 3">some-text 3</option>
       </select>
     </div>
     <div style="display: flex; gap: 10px">
@@ -45,6 +45,7 @@
         <p>Какой-то текст</p>
         <p>{{ count }}</p>
         <img :src="username" alt="" style="width: 200px" />
+        <h1>{{ option }}</h1>
         <div>
           From <span style="font-weight: 700">{{ from }}</span> to
           <span>{{ to }}</span>
