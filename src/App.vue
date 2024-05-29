@@ -33,6 +33,11 @@
         @input="updateHtmlCode"
         @change="updateHtmlCode"
       />
+      <select v-model="option" name="option">
+        <option value="some-text">some-text 1</option>
+        <option value="some-text">some-text 2</option>
+        <option value="some-text">some-text 3</option>
+      </select>
     </div>
     <div style="display: flex; gap: 10px">
       <div class="content" ref="contentRef">
@@ -63,6 +68,7 @@ const username = ref(0);
 const from = ref(0);
 const to = ref(0);
 const count = ref(0);
+const option = ref(0);
 
 const updateHtmlCode = () => {
   if (contentRef.value) {
