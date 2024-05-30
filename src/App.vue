@@ -1,43 +1,64 @@
 <template>
   <div>
     <div class="constuctor-inputs">
-      <label for="username">Картинка</label>
-      <input
-        name="username"
-        type="text"
-        v-model="username"
-        @input="updateHtmlCode"
-        @change="updateHtmlCode"
-      />
-      <label for="from">Откуда</label>
-      <input
-        name="from"
-        type="text"
-        v-model="from"
-        @input="updateHtmlCode"
-        @change="updateHtmlCode"
-      />
-      <label for="to">Куда</label>
-      <input
-        name="to"
-        type="text"
-        v-model="to"
-        @input="updateHtmlCode"
-        @change="updateHtmlCode"
-      />
-      <label for="count">Кол-во</label>
-      <input
-        name="count"
-        type="text"
-        v-model="count"
-        @input="updateHtmlCode"
-        @change="updateHtmlCode"
-      />
-      <select v-model="option" name="option">
-        <option value="some-text 1">some-text 1</option>
-        <option value="some-text 2">some-text 2</option>
-        <option value="some-text 3">some-text 3</option>
-      </select>
+      <div class="constuctor-inputs__group">
+        <label for="username">Картинка</label>
+        <input
+          name="username"
+          type="text"
+          v-model="username"
+          @input="updateHtmlCode"
+          @change="updateHtmlCode"
+        />
+      </div>
+      <div class="constuctor-inputs__group">
+        <label for="from">Откуда</label>
+        <input
+          name="from"
+          type="text"
+          v-model="from"
+          @input="updateHtmlCode"
+          @change="updateHtmlCode"
+        />
+      </div>
+      <div class="constuctor-inputs__group">
+        <label for="to">Куда</label>
+        <input
+          name="to"
+          type="text"
+          v-model="to"
+          @input="updateHtmlCode"
+          @change="updateHtmlCode"
+        />
+      </div>
+      <div class="constuctor-inputs__group">
+        <label for="count">Кол-во</label>
+        <input
+          name="count"
+          type="text"
+          v-model="count"
+          @input="updateHtmlCode"
+          @change="updateHtmlCode"
+        />
+      </div>
+      <div class="constuctor-inputs__group">
+        <label for="option">Какая-то херь</label>
+        <select v-model="option" name="option">
+          <option value="some-text 1">some-text 1</option>
+          <option value="some-text 2">some-text 2</option>
+          <option value="some-text 3">some-text 3</option>
+        </select>
+      </div>
+      <div class="constuctor-inputs__group">
+        <label for="payment-link">Payment link</label>
+        <input
+          name="payment-link"
+          type="text"
+          v-model="paymentLink"
+          @input="updateHtmlCode"
+          @change="updateHtmlCode"
+        />
+      </div>
     </div>
     <div style="display: flex; gap: 10px">
       <div class="content" ref="contentRef">
@@ -52,7 +73,7 @@
         </div>
         <div>
           <a
-            href="https://smflights.com/"
+            :href="paymentLink"
             style="
               display: inline-block;
               padding: 10px 20px;
@@ -77,11 +98,12 @@ import { ref, watch, onMounted } from "vue";
 
 const contentRef = ref(null);
 const htmlCode = ref("");
-const username = ref(0);
-const from = ref(0);
-const to = ref(0);
-const count = ref(0);
-const option = ref(0);
+const username = ref("");
+const from = ref("");
+const to = ref("");
+const count = ref("");
+const option = ref("");
+const paymentLink = ref("");
 
 const updateHtmlCode = () => {
   if (contentRef.value) {
@@ -109,7 +131,17 @@ onMounted(() => {
   padding: 20px;
   margin-bottom: 20px;
 }
-
+.constuctor-inputs {
+  display: flex;
+  gap: 10px;
+}
+.constuctor-inputs__group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+}
 .html-code {
   width: 600px;
   border: 1px solid #ccc;
