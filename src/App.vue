@@ -44,17 +44,29 @@
         <h1>Заголовок</h1>
         <p>Какой-то текст</p>
         <p>{{ count }}</p>
-        <img :src="username" alt="" style="width: 200px" />
+        <img :src="username" alt="" style="width: 200px; border-radius: 10px" />
         <h1>{{ option }}</h1>
         <div>
           From <span style="font-weight: 700">{{ from }}</span> to
           <span>{{ to }}</span>
         </div>
-        <a href="https://smflights.com/" class="" target="_blank">123</a>
+        <div>
+          <a
+            href="https://smflights.com/"
+            style="
+              display: inline-block;
+              padding: 10px 20px;
+              background-color: #000;
+              border-radius: 10px;
+            "
+            target="_blank"
+            >Pay booking</a
+          >
+        </div>
       </div>
       <div class="html-code">
         <h2>HTML код:</h2>
-        <pre>{{ htmlCode }}</pre>
+        <pre><code>{{ htmlCode }}</code></pre>
       </div>
     </div>
   </div>
@@ -78,7 +90,7 @@ const updateHtmlCode = () => {
 };
 
 watch(
-  username,
+  [username, from, to, count, option],
   () => {
     updateHtmlCode();
   },
@@ -99,14 +111,22 @@ onMounted(() => {
 }
 
 .html-code {
-  width: 400px;
-  background-color: #f5f5f5;
+  width: 600px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+  overflow: auto;
   white-space: pre-wrap;
-  word-wrap: break-word; /* для переноса слов */
-  overflow: auto; /* добавляем прокрутку для длинного содержимого */
-  padding: 20px;
-  white-space: pre-wrap;
-  word-break: break-all;
+  box-sizing: border-box; /* Включает padding и border в общую ширину */
+}
+
+.html-code pre {
+  white-space: pre-wrap; /* Обеспечивает перенос строк */
+  word-wrap: break-word; /* Переносит длинные слова */
+}
+
+.html-code code {
+  display: block;
 }
 .constuctor-inputs {
   padding: 10px 15px;
