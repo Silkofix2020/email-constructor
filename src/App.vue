@@ -1,45 +1,23 @@
 <template>
+  <div>https://lk.seven-sky.net/images/pay-system/sber.jpg</div>
   <div>
+    <button class="somebtn">ororororroro</button>
     <div class="constuctor-inputs">
       <div class="constuctor-inputs__group">
         <label for="username">Картинка</label>
-        <input
-          name="username"
-          type="text"
-          v-model="username"
-          @input="updateHtmlCode"
-          @change="updateHtmlCode"
-        />
+        <input name="username" type="text" v-model="username" />
       </div>
       <div class="constuctor-inputs__group">
         <label for="from">Откуда</label>
-        <input
-          name="from"
-          type="text"
-          v-model="from"
-          @input="updateHtmlCode"
-          @change="updateHtmlCode"
-        />
+        <input name="from" type="text" v-model="from" />
       </div>
       <div class="constuctor-inputs__group">
         <label for="to">Куда</label>
-        <input
-          name="to"
-          type="text"
-          v-model="to"
-          @input="updateHtmlCode"
-          @change="updateHtmlCode"
-        />
+        <input name="to" type="text" v-model="to" />
       </div>
       <div class="constuctor-inputs__group">
         <label for="count">Кол-во</label>
-        <input
-          name="count"
-          type="text"
-          v-model="count"
-          @input="updateHtmlCode"
-          @change="updateHtmlCode"
-        />
+        <input name="count" type="text" v-model="count" />
       </div>
       <div class="constuctor-inputs__group">
         <label for="option">Какая-то херь</label>
@@ -51,52 +29,30 @@
       </div>
       <div class="constuctor-inputs__group">
         <label for="payment-link">Payment link</label>
-        <input
-          name="payment-link"
-          type="text"
-          v-model="paymentLink"
-          @input="updateHtmlCode"
-          @change="updateHtmlCode"
-        />
+        <input name="payment-link" type="text" v-model="paymentLink" />
       </div>
     </div>
-    <div style="display: flex; gap: 10px">
-      <div class="content" ref="contentRef">
-        <h1>Заголовок</h1>
-        <p>Какой-то текст</p>
-        <p>{{ count }}</p>
-        <img :src="username" alt="" style="width: 200px; border-radius: 10px" />
-        <h1>{{ option }}</h1>
-        <div>
-          From <span style="font-weight: 700">{{ from }}</span> to
-          <span>{{ to }}</span>
-        </div>
-        <div>
-          <a
-            :href="paymentLink"
-            style="
-              display: inline-block;
-              padding: 10px 20px;
-              background-color: #000;
-              border-radius: 10px;
-            "
-            target="_blank"
-            >Pay booking</a
-          >
-        </div>
-      </div>
-      <div class="html-code">
-        <h2>HTML код:</h2>
-        <pre><code>{{ htmlCode }}</code></pre>
-      </div>
+    <EmailPreview
+      :username="username"
+      :from="from"
+      :to="to"
+      :count="count"
+      :option="option"
+      :paymentLink="paymentLink"
+      @update-html-code="updateHtmlCode"
+    />
+    <div class="html-code">
+      <h2>HTML код:</h2>
+      <pre><code>{{ htmlCode }}</code></pre>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref } from "vue";
 
-const contentRef = ref(null);
+import EmailPreview from "./EmailPreview.vue";
+
 const htmlCode = ref("");
 const username = ref("");
 const from = ref("");
@@ -105,26 +61,24 @@ const count = ref("");
 const option = ref("");
 const paymentLink = ref("");
 
-const updateHtmlCode = () => {
-  if (contentRef.value) {
-    htmlCode.value = contentRef.value.innerHTML;
-  }
+const updateHtmlCode = (code) => {
+  htmlCode.value = code;
 };
-
-watch(
-  [username, from, to, count, option],
-  () => {
-    updateHtmlCode();
-  },
-  { immediate: true }
-);
-
-onMounted(() => {
-  updateHtmlCode();
-});
 </script>
 
 <style>
+.somebtn {
+  background-color: #179c7f;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.somebtn:hover {
+  background-color: #15e0b4;
+}
 .content {
   width: 300px;
   border: 1px solid #ccc;
