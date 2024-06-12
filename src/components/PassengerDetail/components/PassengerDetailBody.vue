@@ -57,7 +57,10 @@
                   "
                 >
                   <tbody>
-                    <tr>
+                    <tr
+                      v-for="(passenger, index) in passengers"
+                      :key="'output-' + index"
+                    >
                       <th
                         style="
                           font-weight: normal;
@@ -71,7 +74,7 @@
                         <img
                           alt=""
                           height="24"
-                          src="https://ci3.googleusercontent.com/meips/ADKq_Na__G3SN5dt7XxhCrxi2rzsFQNb6ZF0NaXxa6TeMdYz6uLAiaGcBhn8xjEQzMTZ9u7VssFTgB91MVbFQFhSc_zEQBMFOnyLCc5caVfzmXraOJKql0HRo40=s0-d-e1-ft#https://images.kiwi.com/orbit-icons/primary/48x48/gender-woman.png"
+                          src="https://i.ibb.co/NNYy4z7/icons8-person-30.png"
                           width="24"
                           class="CToWUd"
                           data-bit="iit"
@@ -86,7 +89,10 @@
                         "
                       >
                         <p style="margin: 0px 0px 4px">
-                          <strong>{{ firstName }} {{ secondName }}</strong>
+                          <strong
+                            >{{ passenger?.firstName }}
+                            {{ passenger?.secondName }}</strong
+                          >
                         </p>
                       </th>
                     </tr>
@@ -162,8 +168,9 @@
                     table-layout: auto;
                   "
                 >
+                  <!-- Багаж -->
                   <tbody>
-                    <tr>
+                    <tr v-if="!!cabinBag">
                       <th
                         style="
                           font-weight: normal;
@@ -174,7 +181,7 @@
                           white-space: nowrap;
                         "
                       >
-                        1&nbsp;×
+                        {{ countCabinBag }} &nbsp;×
                       </th>
                       <th
                         style="
@@ -188,7 +195,7 @@
                         <img
                           alt=""
                           height="24"
-                          src="https://ci3.googleusercontent.com/meips/ADKq_Nbri2mgFDRuwpsIDG701ZJFL1ohbyrorfEBpY5ovuJ1ZQiGm-GdcmBD_gmyVJPp1atMFDTBn_4EqeKPDc7ODo-B_e2mMPDL84VWeRsfaBSSPR61pmgZDIEfz3mfES_aqJ8=s0-d-e1-ft#https://images.kiwi.com/orbit-icons/primary/48x48/baggage-personal-item.png"
+                          src="https://i.ibb.co/mcHPWSh/unnamed-5.png"
                           width="24"
                           class="CToWUd"
                           data-bit="iit"
@@ -202,14 +209,106 @@
                           vertical-align: top;
                         "
                       >
-                        Personal item <br /><span
+                        Cabin baggage <br /><span
                           style="
                             font-size: 12px;
                             line-height: 16px;
                             color: rgb(95, 115, 140);
                           "
-                          >40 × 25 × 20 cm , 10 kg
+                          >{{ sizeCabinBag }} cm , {{ weightCabinBag }} kg
                         </span>
+                      </th>
+                    </tr>
+                    <tr v-if="!!checkBag">
+                      <th
+                        style="
+                          font-weight: normal;
+                          text-align: left;
+                          vertical-align: top;
+                          width: 1px;
+                          padding-right: 6px;
+                          white-space: nowrap;
+                        "
+                      >
+                        {{ countCheckedBag }} &nbsp;×
+                      </th>
+                      <th
+                        style="
+                          font-weight: normal;
+                          text-align: left;
+                          vertical-align: top;
+                          width: 16px;
+                          padding-right: 8px;
+                        "
+                      >
+                        <img
+                          alt=""
+                          height="24"
+                          src="https://i.ibb.co/B6YwT39/luggage.png"
+                          width="24"
+                          class="CToWUd"
+                          data-bit="iit"
+                          style="border: 0px; vertical-align: top"
+                        />
+                      </th>
+                      <th
+                        style="
+                          font-weight: normal;
+                          text-align: left;
+                          vertical-align: top;
+                        "
+                      >
+                        Checked baggage <br /><span
+                          style="
+                            font-size: 12px;
+                            line-height: 16px;
+                            color: rgb(95, 115, 140);
+                          "
+                          >{{ sizeCheckedBag }} cm , {{ weightCheckedBag }} kg
+                        </span>
+                      </th>
+                    </tr>
+                  </tbody>
+                  <!-- Без багажа -->
+                  <tbody v-if="!(cabinBag || checkBag)">
+                    <tr>
+                      <th
+                        style="
+                          font-weight: normal;
+                          text-align: left;
+                          vertical-align: top;
+                          width: 1px;
+                          padding-right: 6px;
+                          white-space: nowrap;
+                        "
+                      ></th>
+                      <th
+                        style="
+                          font-weight: normal;
+                          text-align: left;
+                          vertical-align: top;
+                          width: 16px;
+                          padding-right: 8px;
+                        "
+                      >
+                        <img
+                          alt=""
+                          height="24"
+                          src="https://i.ibb.co/7X36qVy/icons8-no-baggage-50.png"
+                          width="24"
+                          class="CToWUd"
+                          data-bit="iit"
+                          style="border: 0px; vertical-align: top"
+                        />
+                      </th>
+                      <th
+                        style="
+                          font-weight: normal;
+                          text-align: left;
+                          vertical-align: top;
+                        "
+                      >
+                        No baggage <br />
                       </th>
                     </tr>
                   </tbody>
@@ -224,10 +323,19 @@
 </template>
 
 <script setup>
-import { inject } from "vue";
+import { ref, inject, onMounted, watch } from "vue";
 
-const firstName = inject("firstName");
-const secondName = inject("secondName");
+const cabinBag = inject("cabinBag");
+const checkBag = inject("checkBag");
+const countCabinBag = inject("countCabinBag");
+const weightCabinBag = inject("weightCabinBag");
+const sizeCabinBag = inject("sizeCabinBag");
+const countCheckedBag = inject("countCheckedBag");
+const weightCheckedBag = inject("weightCheckedBag");
+const sizeCheckedBag = inject("sizeCheckedBag");
+
+// Получить инжектированные данные
+const passengers = inject("passengers", ref([]));
 </script>
 
 <style></style>

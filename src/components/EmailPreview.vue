@@ -205,16 +205,6 @@ import CompanyContacts from "./CompanyContacts/CompanyContacts.vue";
 
 const emit = defineEmits(["update-html-code"]);
 
-const airportCode = ref("");
-
-const props = defineProps({
-  username: String,
-  from: String,
-  to: String,
-  count: String,
-  option: String,
-  paymentLink: String,
-});
 const contentRef = ref(null);
 
 const updateHtmlCode = () => {
@@ -223,34 +213,20 @@ const updateHtmlCode = () => {
   }
 };
 
-const cityToAirportMap = {
-  "Moscow, Russia": "SVO",
-  "Valencia, Spain": "VLC",
-  // Добавьте другие города и аэропорты здесь
+// Использование MutationObserver для отслеживания изменений
+const observeChanges = () => {
+  const observer = new MutationObserver(updateHtmlCode);
+  observer.observe(contentRef.value, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+  });
 };
 
-const updateAirportCode = () => {
-  airportCode.value =
-    cityToAirportMap[props.username] || "Код аэропорта не найден";
-};
-
-watch(
-  () => [
-    props.username,
-    props.from,
-    props.to,
-    props.count,
-    props.option,
-    props.paymentLink,
-  ],
-  (newValues, oldValues) => {
-    updateHtmlCode();
-  },
-  { immediate: true, deep: true }
-);
-
+// Вызов updateHtmlCode и настройка наблюдателя при монтировании компонента
 onMounted(() => {
   updateHtmlCode();
+  observeChanges();
 });
 </script>
 <style>

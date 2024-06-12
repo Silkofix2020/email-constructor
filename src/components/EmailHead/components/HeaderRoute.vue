@@ -11,7 +11,7 @@
       margin: 0px 0px 8px;
     "
   >
-    {{ from }}
+    {{ fromCity }}
     <img
       alt=""
       height="20"
@@ -21,15 +21,15 @@
       data-bit="iit"
       style="border: 0px; vertical-align: top"
     />
-    {{ to }}
+    {{ toCity }}
   </h3>
 </template>
 
 <script setup>
-import { ref, inject } from "vue";
+import { inject } from "vue";
 
-const from = inject("from");
-const to = inject("to");
+const fromCity = inject("fromCity");
+const toCity = inject("toCity");
 </script>
 
 <style></style>

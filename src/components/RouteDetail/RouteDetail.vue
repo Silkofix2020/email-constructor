@@ -117,7 +117,7 @@
                                   <img
                                     alt=""
                                     height="24"
-                                    src="https://ci3.googleusercontent.com/meips/ADKq_NbLIAc2rqr0w3AQKuwU5RX8D-tr6vGVsXoomcsaie1FfGfOp7E9ZQGmX36Q39ItJgnGAcWKvzCO7V_xpzyoKUPjlSFonhG7d7hKVtiFJWeUFyo0Ey19g70o4OBc_gA=s0-d-e1-ft#https://images.kiwi.com/orbit-icons/secondary/48x48/airplane-takeoff.png"
+                                    src="https://i.ibb.co/2tgj1B8/unnamed-6.png"
                                     width="24"
                                     class="CToWUd"
                                     data-bit="iit"
@@ -131,14 +131,12 @@
                                     vertical-align: top;
                                   "
                                 >
-                                  <strong></strong> Moscow, Italy <br /><span
-                                    style="
-                                      font-size: 12px;
-                                      line-height: 16px;
-                                      color: rgb(95, 115, 140);
-                                    "
-                                    >Moscow International</span
-                                  >
+                                  <strong>{{ fromAeroCode }}</strong>
+                                  {{ fromCity }}, {{ fromCountry }} <br />
+                                  <div style="padding-top: 8px">
+                                    Carrier:
+                                    <strong>{{ aviacompanyFrom }}</strong>
+                                  </div>
                                 </th>
                                 <th
                                   style="
@@ -154,7 +152,7 @@
                                       line-height: 16px;
                                       color: rgb(95, 115, 140);
                                     "
-                                    >{{ formattedDate }}</span
+                                    >{{ formattedFromDate }}</span
                                   >
                                 </th>
                               </tr>
@@ -223,7 +221,7 @@
                                   <img
                                     alt=""
                                     height="24"
-                                    src="https://ci3.googleusercontent.com/meips/ADKq_NanwICcDS4Wraz2mt0BsUsDDdQ3PhlOjR7Wz5TuVbM_yAGmDZi0vbZ-iAWlo5mYyIRQBMxK_anWFq0g3_nBZD7ewKHQ4bz3yKvF8xkw-i9DaGSjqyIZS8w4WixW5X8=s0-d-e1-ft#https://images.kiwi.com/orbit-icons/secondary/48x48/airplane-landing.png"
+                                    src="https://i.ibb.co/XbNWtrS/unnamed-7.png"
                                     width="24"
                                     class="CToWUd"
                                     data-bit="iit"
@@ -237,19 +235,11 @@
                                     vertical-align: top;
                                   "
                                 >
-                                  <strong>VLC</strong> Valencia, Spain
-                                  <br /><span
-                                    style="
-                                      font-size: 12px;
-                                      line-height: 16px;
-                                      color: rgb(95, 115, 140);
-                                    "
-                                    >Valencia</span
-                                  >
+                                  <strong>{{ toAeroCode }}</strong>
+                                  {{ toCity }}, {{ toCountry }} <br />
                                   <div style="padding-top: 8px">
-                                    Carrier: <strong>Ryanair</strong><br />
-                                    Operating carrier:
-                                    <strong>Malta Air</strong>
+                                    Carrier:
+                                    <strong>{{ aviacompanyTo }}</strong>
                                   </div>
                                 </th>
                                 <th
@@ -259,13 +249,14 @@
                                     text-align: right;
                                   "
                                 >
-                                  <strong>15:30</strong><br /><span
+                                  <strong>{{ toTime }}</strong
+                                  ><br /><span
                                     style="
                                       font-size: 12px;
                                       line-height: 16px;
                                       color: rgb(95, 115, 140);
                                     "
-                                    >Thu, 2 Nov 2023</span
+                                    >{{ formattedToDate }}</span
                                   >
                                 </th>
                               </tr>
@@ -289,15 +280,40 @@
 import { inject, ref, watch } from "vue";
 import dayjs from "dayjs";
 
+const fromAeroCode = inject("fromAeroCode");
+const fromCity = inject("fromCity");
+const fromCountry = inject("fromCountry");
+const aviacompanyFrom = inject("aviacompanyFrom");
 const fromTime = inject("fromTime");
 const fromDate = inject("fromDate");
+const toAeroCode = inject("toAeroCode");
+const toCity = inject("toCity");
+const toCountry = inject("toCountry");
+const aviacompanyTo = inject("aviacompanyTo");
+const toTime = inject("toTime");
+const toDate = inject("toDate");
 
-const formattedDate = ref("");
+const formattedFromDate = ref("");
+const formattedToDate = ref("");
 
+// Функция для форматирования дат
+const formatDate = (date) => {
+  return dayjs(date).format("ddd, D MMM YYYY");
+};
+
+// Наблюдаем за изменениями `fromDate` и `toDate`
 watch(
   fromDate,
-  (newValue) => {
-    formattedDate.value = dayjs(newValue).format("ddd, D MMM YYYY");
+  (newFromDate) => {
+    formattedFromDate.value = newFromDate ? formatDate(newFromDate) : "";
+  },
+  { immediate: true }
+);
+
+watch(
+  toDate,
+  (newToDate) => {
+    formattedToDate.value = newToDate ? formatDate(newToDate) : "";
   },
   { immediate: true }
 );
