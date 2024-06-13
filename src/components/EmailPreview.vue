@@ -107,6 +107,7 @@
                                 <PassengerContacts />
                               </th>
                             </tr>
+                            <Button />
                           </tbody>
                         </table>
                         <table
@@ -178,6 +179,7 @@
                                     </tr>
                                   </tbody>
                                 </table>
+                                <EmailFooter />
                               </th>
                             </tr>
                           </tbody>
@@ -197,11 +199,13 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 import EmailHead from "./EmailHead/EmailHead.vue";
+import EmailFooter from "./EmailFooter/EmailFooter.vue";
 import HeaderRoute from "./EmailHead/components/HeaderRoute.vue";
 import PassengerDetail from "./PassengerDetail/PassengerDetail.vue";
 import RouteDetail from "./RouteDetail/RouteDetail.vue";
 import PassengerContacts from "./PassengerContacts/PassengerContacts.vue";
 import CompanyContacts from "./CompanyContacts/CompanyContacts.vue";
+import Button from "./Button.vue";
 
 const emit = defineEmits(["update-html-code"]);
 

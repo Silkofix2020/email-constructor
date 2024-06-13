@@ -86,7 +86,7 @@
                         >
                           <img
                             alt=""
-                            src="https://ci3.googleusercontent.com/meips/ADKq_NYcmfb0L2sRXn9uS7SZmVKnYLaYI9NpsPfEkr30qqy92KxjKHGJaVb5pkIWioiYlWM2mqeN3g-wxn8dr4V0-SlYNWrp=s0-d-e1-ft#https://images.kiwi.com/flags/24x0/flag-ru.jpg"
+                            src="https://i.ibb.co/3zCSXrV/icons8-great-britain-48.png"
                             width="24px"
                             class="CToWUd"
                             data-bit="iit"
@@ -219,7 +219,7 @@
                                           "
                                         >
                                           <a
-                                            href="tel:+16136994479"
+                                            href="https://wa.me/79935910334"
                                             target="_blank"
                                             style="
                                               border-radius: 20px;
@@ -232,7 +232,7 @@
                                               background: rgb(235, 244, 236);
                                               color: rgb(40, 161, 56);
                                             "
-                                            >+1 613-699-4479</a
+                                            >Contact us via whatsapp</a
                                           >
                                         </th>
                                       </tr>

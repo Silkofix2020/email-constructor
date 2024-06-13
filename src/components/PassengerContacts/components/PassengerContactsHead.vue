@@ -15,7 +15,3 @@
     Your contacts
   </h5>
 </template>
-
-<script lang="ts" setup></script>
-
-<style></style>

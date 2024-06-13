@@ -11,14 +11,14 @@
         >
           <label :for="'firstName' + index">Имя</label>
           <input
-            :placeholder="'Введите имя пассажира ' + (index + 1)"
+            :placeholder="'Pass name ' + (index + 1)"
             :name="'firstName' + index"
             type="text"
             v-model="passenger.firstName"
           />
           <label :for="'secondName' + index">Фамилия</label>
           <input
-            :placeholder="'Введите фамилию пассажира ' + (index + 1)"
+            :placeholder="'Pass secondname ' + (index + 1)"
             :name="'secondName' + index"
             type="text"
             v-model="passenger.secondName"
@@ -45,88 +45,91 @@
           v-model="passengerEmail"
         />
       </div>
-      <div class="constuctor-inputs__group">
-        <h3>Данные отправления</h3>
-        <label for="fromCity">Откуда (Город)</label>
-        <input
-          placeholder="Moscow"
-          name="fromCity"
-          type="text"
-          v-model="fromCity"
-        />
-        <label for="fromAeroCode">Откуда (Код аэропорта)</label>
-        <input
-          placeholder="SVO"
-          name="fromAeroCode"
-          type="text"
-          v-model="fromAeroCode"
-        />
-        <label for="fromCountry">Откуда (Страна)</label>
-        <input
-          placeholder="USSR"
-          name="fromCountry"
-          type="text"
-          v-model="fromCountry"
-        />
-        <label for="aviacompanyFrom">Авиакомпания</label>
-        <input
-          placeholder="Aeroflot"
-          name="aviacompanyFrom"
-          type="text"
-          v-model="aviacompanyFrom"
-        />
-        <label for="fromTime">Время вылета</label>
-        <input
-          name="fromTime"
-          placeholder="чч:мм"
-          type="text"
-          v-model="fromTime"
-          @input="formatTimeInput('fromTime')"
-        />
-        <label for="fromDate">Дата вылета</label>
-        <input name="fromDate" type="date" v-model="fromDate" />
+      <div class="wrap">
+        <div class="constuctor-inputs__group">
+          <h3>Данные отправления</h3>
+          <label for="fromCity">Откуда (Город)</label>
+          <input
+            placeholder="Moscow"
+            name="fromCity"
+            type="text"
+            v-model="fromCity"
+          />
+          <label for="fromAeroCode">Откуда (Код аэропорта)</label>
+          <input
+            placeholder="SVO"
+            name="fromAeroCode"
+            type="text"
+            v-model="fromAeroCode"
+          />
+          <label for="fromCountry">Откуда (Страна)</label>
+          <input
+            placeholder="USSR"
+            name="fromCountry"
+            type="text"
+            v-model="fromCountry"
+          />
+          <label for="aviacompanyFrom">Авиакомпания</label>
+          <input
+            placeholder="Aeroflot"
+            name="aviacompanyFrom"
+            type="text"
+            v-model="aviacompanyFrom"
+          />
+          <label for="fromTime">Время вылета</label>
+          <input
+            name="fromTime"
+            placeholder="чч:мм"
+            type="text"
+            v-model="fromTime"
+            @input="formatTimeInput('fromTime')"
+          />
+          <label for="fromDate">Дата вылета</label>
+          <input name="fromDate" type="date" v-model="fromDate" />
+        </div>
+        <div class="constuctor-inputs__group">
+          <h3>Данные прибытия</h3>
+          <label for="toCity">Куда (Город)</label>
+          <input
+            placeholder="Berlin"
+            name="toCity"
+            type="text"
+            v-model="toCity"
+          />
+          <label for="toAeroCode">Куда (Код аэропорта)</label>
+          <input
+            placeholder="BER"
+            name="toAeroCode"
+            type="text"
+            v-model="toAeroCode"
+          />
+          <label for="toCountry">Куда (Страна)</label>
+          <input
+            placeholder="Germany"
+            name="toCountry"
+            type="text"
+            v-model="toCountry"
+          />
+          <label for="aviacompanyTo">Авиакомпания</label>
+          <input
+            placeholder="Aeroflot"
+            name="aviacompanyTo"
+            type="text"
+            v-model="aviacompanyTo"
+          />
+          <label for="toTime">Время прилета</label>
+          <input
+            name="toTime"
+            placeholder="чч:мм"
+            type="text"
+            v-model="toTime"
+            @input="formatTimeInput('toTime')"
+          />
+          <label for="toDate">Дата прилета</label>
+          <input name="toDate" type="date" v-model="toDate" />
+        </div>
       </div>
-      <div class="constuctor-inputs__group">
-        <h3>Данные прибытия</h3>
-        <label for="toCity">Куда (Город)</label>
-        <input
-          placeholder="Berlin"
-          name="toCity"
-          type="text"
-          v-model="toCity"
-        />
-        <label for="toAeroCode">Куда (Код аэропорта)</label>
-        <input
-          placeholder="BER"
-          name="toAeroCode"
-          type="text"
-          v-model="toAeroCode"
-        />
-        <label for="toCountry">Куда (Страна)</label>
-        <input
-          placeholder="Germany"
-          name="toCountry"
-          type="text"
-          v-model="toCountry"
-        />
-        <label for="aviacompanyTo">Авиакомпания</label>
-        <input
-          placeholder="Aeroflot"
-          name="aviacompanyTo"
-          type="text"
-          v-model="aviacompanyTo"
-        />
-        <label for="toTime">Время прилета</label>
-        <input
-          name="toTime"
-          placeholder="чч:мм"
-          type="text"
-          v-model="toTime"
-          @input="formatTimeInput('toTime')"
-        />
-        <label for="toDate">Дата прилета</label>
-        <input name="toDate" type="date" v-model="toDate" />
-      </div>
+
       <div class="constuctor-inputs__group">
         <h3>Багаж</h3>
         <div class="constuctor-inputs__subgroup">
@@ -188,21 +191,14 @@
           @input="formatInput('sizeCheckedBag')"
         />
       </div>
-      <div class="constuctor-inputs__group">
-        <label for="option">Какая-то херь</label>
-        <select name="option">
-          <option value="some-text 1">some-text 1</option>
-          <option value="some-text 2">some-text 2</option>
-          <option value="some-text 3">some-text 3</option>
-        </select>
-      </div>
       <div class="constuctor-inputs__group"></div>
       <div class="constuctor-inputs__group">
+        <h3>Ссылка на оплату</h3>
         <label for="payment-link">Payment link</label>
         <input name="payment-link" type="text" v-model="paymentLink" />
       </div>
     </div>
-    <div></div>
+
     <div class="preview">
       <EmailPreview @update-html-code="updateHtmlCode"></EmailPreview>
       <div class="html-code">
@@ -232,6 +228,7 @@ const toAeroCode = ref("");
 const toCountry = ref("");
 const toTime = ref("");
 const toDate = ref("");
+const roundTrip = ref("");
 const cabinBag = ref("");
 const checkBag = ref("");
 const countCabinBag = ref("");
@@ -264,9 +261,28 @@ provide("sizeCabinBag", sizeCabinBag);
 provide("countCheckedBag", countCheckedBag);
 provide("weightCheckedBag", weightCheckedBag);
 provide("sizeCheckedBag", sizeCheckedBag);
+provide("paymentLink", paymentLink);
+provide("passengerPhone", passengerPhone);
+provide("passengerEmail", passengerEmail);
 
 // Массив объектов, где каждый объект представляет одного пассажира
 const passengers = ref([{ firstName: "", secondName: "" }]);
+const routes = ref([
+  {
+    fromAeroCode: "",
+    fromCity: "",
+    fromCountry: "",
+    aviacompanyFrom: "",
+    fromTime: "",
+    fromDate: "",
+    toAeroCode: "",
+    toCity: "",
+    toCountry: "",
+    aviacompanyTo: "",
+    toTime: "",
+    toDate: "",
+  },
+]);
 
 const addPassenger = () => {
   passengers.value.push({ firstName: "", secondName: "" });
@@ -335,6 +351,10 @@ const updateHtmlCode = (code) => {
 </script>
 
 <style>
+.wrap {
+  display: flex;
+  gap: 5px;
+}
 .preview {
   display: flex;
   gap: 5px;
@@ -362,14 +382,9 @@ const updateHtmlCode = (code) => {
   display: flex;
   gap: 10px;
   margin-bottom: 5px;
+  color: #1a202c;
 }
-.constuctor-inputs__group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 400;
-}
+
 .html-code {
   width: 600px;
   border: 1px solid #ccc;
@@ -395,6 +410,19 @@ const updateHtmlCode = (code) => {
   font-weight: 400;
   font-style: normal;
 }
+.constuctor-inputs__group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 400;
+}
+.constuctor-inputs__subgroup {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .btn {
   background-color: #00c16a;
   border: none;
@@ -409,5 +437,21 @@ const updateHtmlCode = (code) => {
 }
 .btn:hover {
   background-color: #00a155;
+}
+input,
+input[type="date"] {
+  border: 1px solid #cbd5e1;
+  padding: 6px 10px;
+  border-radius: 7px;
+  color: #1a202c;
+}
+input:focus {
+  outline-offset: 1px;
+  outline-color: #00a155;
+  transition: none;
+}
+input::placeholder,
+input[type="date"]::placeholder {
+  color: #cbd5e0;
 }
 </style>

@@ -101,7 +101,9 @@
                             text-align: left;
                             vertical-align: top;
                           "
-                        ></th>
+                        >
+                          <p>{{ passengerPhone }}</p>
+                        </th>
                       </tr>
                     </tbody>
                   </table>
@@ -185,9 +187,9 @@
                           "
                         >
                           <a
-                            href="mailto:nastenaermakova@gmail.com"
+                            :href="`mailto:${passengerEmail}`"
                             target="_blank"
-                            >nastenaermakova@gmail.com</a
+                            >{{ passengerEmail }}</a
                           >
                         </th>
                       </tr>
@@ -203,6 +205,11 @@
   </table>
 </template>
 
-<script setup></script>
+<script setup>
+import { inject } from "vue";
+
+const passengerPhone = inject("passengerPhone");
+const passengerEmail = inject("passengerEmail");
+</script>
 
 <style></style>
