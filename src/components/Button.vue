@@ -20,7 +20,7 @@
       "
       target="_blank"
     >
-      Payment booking
+      <slot />
     </a>
   </p>
 </template>

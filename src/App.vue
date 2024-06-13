@@ -191,11 +191,17 @@
           @input="formatInput('sizeCheckedBag')"
         />
       </div>
-      <div class="constuctor-inputs__group"></div>
-      <div class="constuctor-inputs__group">
-        <h3>Ссылка на оплату</h3>
-        <label for="payment-link">Payment link</label>
-        <input name="payment-link" type="text" v-model="paymentLink" />
+      <div class="wrap wrap-column">
+        <div class="constuctor-inputs__group">
+          <h3>Ссылка на оплату</h3>
+          <label for="payment-link">Payment link</label>
+          <input name="payment-link" type="text" v-model="paymentLink" />
+        </div>
+        <div class="constuctor-inputs__group">
+          <h3>Стоимость</h3>
+          <label for="price">Price (in $)</label>
+          <input name="price" type="text" v-model="price" />
+        </div>
       </div>
     </div>
 
@@ -240,6 +246,7 @@ const sizeCheckedBag = ref("");
 const paymentLink = ref("");
 const aviacompanyFrom = ref("");
 const aviacompanyTo = ref("");
+const price = ref("");
 
 provide("fromAeroCode", fromAeroCode);
 provide("fromCity", fromCity);
@@ -264,6 +271,7 @@ provide("sizeCheckedBag", sizeCheckedBag);
 provide("paymentLink", paymentLink);
 provide("passengerPhone", passengerPhone);
 provide("passengerEmail", passengerEmail);
+provide("price", price);
 
 // Массив объектов, где каждый объект представляет одного пассажира
 const passengers = ref([{ firstName: "", secondName: "" }]);
@@ -354,6 +362,9 @@ const updateHtmlCode = (code) => {
 .wrap {
   display: flex;
   gap: 5px;
+}
+.wrap-column {
+  flex-direction: column;
 }
 .preview {
   display: flex;

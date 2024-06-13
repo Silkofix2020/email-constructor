@@ -107,7 +107,7 @@
                                 <PassengerContacts />
                               </th>
                             </tr>
-                            <Button />
+                            <Button>Buy for ${{ price }} </Button>
                           </tbody>
                         </table>
                         <table
@@ -197,7 +197,7 @@
   </div>
 </template>
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, inject, onMounted } from "vue";
 import EmailHead from "./EmailHead/EmailHead.vue";
 import EmailFooter from "./EmailFooter/EmailFooter.vue";
 import HeaderRoute from "./EmailHead/components/HeaderRoute.vue";
@@ -210,6 +210,7 @@ import Button from "./Button.vue";
 const emit = defineEmits(["update-html-code"]);
 
 const contentRef = ref(null);
+const price = inject("price");
 
 const updateHtmlCode = () => {
   if (contentRef.value) {
