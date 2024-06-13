@@ -46,7 +46,7 @@
                   border="0"
                   cellpadding="0"
                   cellspacing="0"
-                  width="640"
+                  width="98%"
                   style="
                     padding: 0px;
                     border-spacing: 0px;
@@ -57,7 +57,7 @@
                     color: rgb(37, 42, 49);
                     table-layout: fixed;
                     margin: 0px auto;
-                    width: 640px;
+                    width: 98%;
                   "
                 >
                   <tbody>
