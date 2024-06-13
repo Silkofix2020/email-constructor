@@ -105,9 +105,9 @@
                                 <HeaderRoute />
                                 <RouteDetail />
                                 <PassengerContacts />
+                                <Button>Buy for ${{ price }} </Button>
                               </th>
                             </tr>
-                            <Button>Buy for ${{ price }} </Button>
                           </tbody>
                         </table>
                         <table
