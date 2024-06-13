@@ -102,7 +102,7 @@
                             vertical-align: top;
                           "
                         >
-                          <p>{{ passengerPhone }}</p>
+                          {{ passengerPhone }}
                         </th>
                       </tr>
                     </tbody>

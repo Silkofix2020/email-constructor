@@ -106,6 +106,15 @@
                                 <RouteDetail />
                                 <PassengerContacts />
                                 <Button>Buy for ${{ price }} </Button>
+                                <p>
+                                  <strong>Want more options?</strong> Let us
+                                  know your preferences (price range, travel
+                                  time, etc.), and we can find additional
+                                  flights that suit your needs. <br /><br />
+                                  <strong>Have questions?</strong> Don't
+                                  hesitate to reply to this email, and our team
+                                  will be happy to assist you.
+                                </p>
                               </th>
                             </tr>
                           </tbody>

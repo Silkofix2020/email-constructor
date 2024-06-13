@@ -11,7 +11,7 @@
       line-height: 36px;
     "
   >
-    So far so good! We’re now confirming your booking with the carrier
+    So far so good! We're ready to confirm this option, just make the payment!
   </h1>
 </template>
 
