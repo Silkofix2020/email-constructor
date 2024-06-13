@@ -264,7 +264,8 @@
                             line-height: 16px;
                             color: rgb(95, 115, 140);
                           "
-                          >{{ sizeCheckedBag }} cm , {{ weightCheckedBag }} kg
+                          >L + W + H = {{ sizeCheckedBag }} cm ,
+                          {{ weightCheckedBag }} kg
                         </span>
                       </th>
                     </tr>
@@ -323,7 +324,7 @@
 </template>
 
 <script setup>
-import { ref, inject, onMounted, watch } from "vue";
+import { ref, inject } from "vue";
 
 const cabinBag = inject("cabinBag");
 const checkBag = inject("checkBag");

@@ -15,13 +15,24 @@
     <img
       alt=""
       height="20"
-      src="https://ci3.googleusercontent.com/meips/ADKq_NbDolbLwXXct4cag7iVN7QO_UeTnM92UEe5ej4wW-m2WIyzYL94mmyVcuqvkRwNSIsz-8oQJeXqD78GEhEJR5yD7NxYab9HpDO3gaGzGPJehco3TINP3t1X=s0-d-e1-ft#https://images.kiwi.com/orbit-icons/primary/32x32/flight-direct.png"
+      src="https://i.ibb.co/X7NZdrM/unnamed-8.png"
       width="20"
       class="CToWUd"
       data-bit="iit"
       style="border: 0px; vertical-align: top"
     />
     {{ toCity }}
+    <img
+      v-if="!!roundTrip"
+      alt=""
+      height="20"
+      src="https://i.ibb.co/X7NZdrM/unnamed-8.png"
+      width="20"
+      class="CToWUd"
+      data-bit="iit"
+      style="border: 0px; vertical-align: top"
+    />
+    <span v-if="!!roundTrip">{{ toCity2 }}</span>
   </h3>
 </template>
 
@@ -30,6 +41,8 @@ import { inject } from "vue";
 
 const fromCity = inject("fromCity");
 const toCity = inject("toCity");
+const roundTrip = inject("roundTrip");
+const toCity2 = inject("toCity2");
 </script>
 
 <style></style>

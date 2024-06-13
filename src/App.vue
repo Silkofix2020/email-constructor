@@ -129,6 +129,95 @@
           <input name="toDate" type="date" v-model="toDate" />
         </div>
       </div>
+      <div class="constuctor-inputs__group">
+        <label for="roundTrip">Round-trip</label>
+        <input type="checkbox" name="roundTrip" v-model="roundTrip" />
+      </div>
+
+      <div class="wrap" v-if="!!roundTrip">
+        <div class="constuctor-inputs__group">
+          <h3>Данные отправления</h3>
+          <label for="fromCity">Откуда (Город)</label>
+          <input
+            placeholder="Moscow"
+            name="fromCity"
+            type="text"
+            v-model="fromCity2"
+          />
+          <label for="fromAeroCode">Откуда (Код аэропорта)</label>
+          <input
+            placeholder="SVO"
+            name="fromAeroCode"
+            type="text"
+            v-model="fromAeroCode2"
+          />
+          <label for="fromCountry">Откуда (Страна)</label>
+          <input
+            placeholder="USSR"
+            name="fromCountry"
+            type="text"
+            v-model="fromCountry2"
+          />
+          <label for="aviacompanyFrom">Авиакомпания</label>
+          <input
+            placeholder="Aeroflot"
+            name="aviacompanyFrom"
+            type="text"
+            v-model="aviacompanyFrom2"
+          />
+          <label for="fromTime">Время вылета</label>
+          <input
+            name="fromTime"
+            placeholder="чч:мм"
+            type="text"
+            v-model="fromTime2"
+            @input="formatTimeInput('fromTime2')"
+          />
+          <label for="fromDate">Дата вылета</label>
+          <input name="fromDate" type="date" v-model="fromDate2" />
+        </div>
+        <div class="constuctor-inputs__group">
+          <h3>Данные прибытия</h3>
+          <label for="toCity">Куда (Город)</label>
+          <input
+            placeholder="Berlin"
+            name="toCity"
+            type="text"
+            v-model="toCity2"
+          />
+          <label for="toAeroCode">Куда (Код аэропорта)</label>
+          <input
+            placeholder="BER"
+            name="toAeroCode"
+            type="text"
+            v-model="toAeroCode2"
+          />
+          <label for="toCountry">Куда (Страна)</label>
+          <input
+            placeholder="Germany"
+            name="toCountry"
+            type="text"
+            v-model="toCountry2"
+          />
+          <label for="aviacompanyTo">Авиакомпания</label>
+          <input
+            placeholder="Aeroflot"
+            name="aviacompanyTo"
+            type="text"
+            v-model="aviacompanyTo2"
+          />
+          <label for="toTime">Время прилета</label>
+          <input
+            name="toTime"
+            placeholder="чч:мм"
+            type="text"
+            v-model="toTime2"
+            @input="formatTimeInput('toTime2')"
+          />
+          <label for="toDate">Дата прилета</label>
+          <input name="toDate" type="date" v-model="toDate2" />
+        </div>
+      </div>
 
       <div class="constuctor-inputs__group">
         <h3>Багаж</h3>
@@ -188,7 +277,6 @@
           type="text"
           maxlength="12"
           v-model="sizeCheckedBag"
-          @input="formatInput('sizeCheckedBag')"
         />
       </div>
       <div class="wrap wrap-column">
@@ -234,6 +322,20 @@ const toAeroCode = ref("");
 const toCountry = ref("");
 const toTime = ref("");
 const toDate = ref("");
+
+const fromCity2 = ref("");
+const fromAeroCode2 = ref("");
+const fromCountry2 = ref("");
+const fromTime2 = ref("");
+const fromDate2 = ref("");
+const toCity2 = ref("");
+const toAeroCode2 = ref("");
+const toCountry2 = ref("");
+const toTime2 = ref("");
+const toDate2 = ref("");
+const aviacompanyFrom2 = ref("");
+const aviacompanyTo2 = ref("");
+
 const roundTrip = ref("");
 const cabinBag = ref("");
 const checkBag = ref("");
@@ -260,6 +362,20 @@ provide("toCountry", toCountry);
 provide("aviacompanyTo", aviacompanyTo);
 provide("toTime", toTime);
 provide("toDate", toDate);
+
+provide("fromAeroCode2", fromAeroCode2);
+provide("fromCity2", fromCity2);
+provide("fromCountry2", fromCountry2);
+provide("aviacompanyFrom2", aviacompanyFrom2);
+provide("fromTime2", fromTime2);
+provide("fromDate2", fromDate2);
+provide("toAeroCode2", toAeroCode2);
+provide("toCity2", toCity2);
+provide("toCountry2", toCountry2);
+provide("aviacompanyTo2", aviacompanyTo2);
+provide("toTime2", toTime2);
+provide("toDate2", toDate2);
+
 provide("cabinBag", cabinBag);
 provide("checkBag", checkBag);
 provide("countCabinBag", countCabinBag);
@@ -272,6 +388,7 @@ provide("paymentLink", paymentLink);
 provide("passengerPhone", passengerPhone);
 provide("passengerEmail", passengerEmail);
 provide("price", price);
+provide("roundTrip", roundTrip);
 
 // Массив объектов, где каждый объект представляет одного пассажира
 const passengers = ref([{ firstName: "", secondName: "" }]);
@@ -306,16 +423,11 @@ provide("removePassenger", removePassenger);
 
 // Форматирование габаритов
 const formatInput = (field) => {
-  if (field === "sizeCabinBag" || field === "sizeCheckedBag") {
-    let value =
-      field === "sizeCabinBag" ? sizeCabinBag.value : sizeCheckedBag.value;
+  if (field === "sizeCabinBag") {
+    let value = sizeCabinBag.value;
     value = value.replace(/[^0-9]/g, "");
     const formattedValue = formatValue(value);
-    if (field === "sizeCabinBag") {
-      sizeCabinBag.value = formattedValue;
-    } else {
-      sizeCheckedBag.value = formattedValue;
-    }
+    sizeCabinBag.value = formattedValue;
   }
 };
 
@@ -331,15 +443,29 @@ const formatValue = (value) => {
 
 // Форматирование времени
 const formatTimeInput = (field) => {
-  if (field === "fromTime" || field === "toTime") {
-    let value = field === "fromTime" ? fromTime.value : toTime.value;
-    value = value.replace(/[^0-9]/g, ""); // Удалить все кроме цифр
-    const formattedValue = formatTimeValue(value);
-    if (field === "fromTime") {
-      fromTime.value = formattedValue;
-    } else {
-      toTime.value = formattedValue;
-    }
+  let value;
+
+  if (field === "fromTime") {
+    value = fromTime.value;
+  } else if (field === "toTime") {
+    value = toTime.value;
+  } else if (field === "fromTime2") {
+    value = fromTime2.value;
+  } else if (field === "toTime2") {
+    value = toTime2.value;
+  }
+
+  value = value.replace(/[^0-9]/g, ""); // Удалить все кроме цифр
+  const formattedValue = formatTimeValue(value);
+
+  if (field === "fromTime") {
+    fromTime.value = formattedValue;
+  } else if (field === "toTime") {
+    toTime.value = formattedValue;
+  } else if (field === "fromTime2") {
+    fromTime2.value = formattedValue;
+  } else if (field === "toTime2") {
+    toTime2.value = formattedValue;
   }
 };
 
@@ -391,9 +517,15 @@ const updateHtmlCode = (code) => {
 .constuctor-inputs {
   border: 1px solid #5c5c5c;
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 5px;
   color: #1a202c;
+  padding: 10px 15px;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .html-code {
@@ -414,13 +546,7 @@ const updateHtmlCode = (code) => {
 .html-code code {
   display: block;
 }
-.constuctor-inputs {
-  padding: 10px 15px;
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
+
 .constuctor-inputs__group {
   display: flex;
   flex-direction: column;
